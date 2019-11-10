@@ -1,0 +1,14 @@
+version: "2"
+
+services:
+  plantuml:
+    image: plantuml/plantuml-server:jetty
+    container_name: plantuml
+    networks:
+      - devtool-network
+    environment:
+      VIRTUAL_HOST: devtool.plantuml.com
+
+networks:
+  devtool-network:
+    external: true

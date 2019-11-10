@@ -1,0 +1,17 @@
+version: "2"
+
+services:
+  proxy:
+    image: jwilder/nginx-proxy
+    container_name: proxy
+    privileged: true
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - devtool-network
+
+networks:
+  devtool-network:
+    external: true
