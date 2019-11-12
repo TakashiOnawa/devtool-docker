@@ -1,9 +1,10 @@
-version: "2"
+version: '2'
 
 services:
   proxy:
     image: jwilder/nginx-proxy
     container_name: proxy
+    restart: always
     privileged: true
     ports:
       - "80:80"

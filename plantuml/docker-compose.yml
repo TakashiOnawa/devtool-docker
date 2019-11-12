@@ -1,9 +1,10 @@
-version: "2"
+version: '2'
 
 services:
   plantuml:
     image: plantuml/plantuml-server:jetty
     container_name: plantuml
+    restart: always
     networks:
       - devtool-network
     environment:

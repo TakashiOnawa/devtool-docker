@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+
+  wekandb:
+    image: mongo:4.0.0
+    container_name: wekan-db
+    restart: always
+    command: mongod --smallfiles --oplogSize 128
+    networks:
+      - wekan-tier
+    expose:
+      - 27017
+    volumes:
+      - wekan-db:/data/db
+      - wekan-db-dump:/dump
+
+  wekan:
+    image: wekanteam/wekan
+    container_name: wekan-app
+    restart: always
+    networks:
+      - devtool-network
+      - wekan-tier
+    environment:
+      - MONGO_URL=mongodb://wekandb:27017/wekan
+      - ROOT_URL=http://devtool.wekan.com
+      - VIRTUAL_HOST=devtool.wekan.com
+      - MAIL_URL='smtp://<mail_url>:25/?ignoreTLS=true&tls={rejectUnauthorized:false}'
+      - MAIL_FROM='Wekan Notifications <noreply.wekan@mydomain.com>'
+      - WITH_API=true
+      - BROWSER_POLICY_ENABLED=true
+    depends_on:
+      - wekandb
+
+volumes:
+  wekan-db:
+    driver: local
+  wekan-db-dump:
+    driver: local
+
+networks:
+  wekan-tier:
+    driver: bridge
+  devtool-network:
+    external: true
