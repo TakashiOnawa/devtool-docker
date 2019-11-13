@@ -3,7 +3,7 @@ version: '2'
 services:
 
   wekandb:
-    image: mongo:4.0.0
+    image: mongo:4.0.12
     container_name: wekan-db
     restart: always
     command: mongod --smallfiles --oplogSize 128
@@ -16,7 +16,7 @@ services:
       - wekan-db-dump:/dump
 
   wekan:
-    image: wekanteam/wekan
+    image: wekanteam/wekan:v3.49
     container_name: wekan-app
     restart: always
     networks:
@@ -24,12 +24,16 @@ services:
       - wekan-tier
     environment:
       - MONGO_URL=mongodb://wekandb:27017/wekan
-      - ROOT_URL=http://devtool.wekan.com
-      - VIRTUAL_HOST=devtool.wekan.com
+      - ROOT_URL=http://wekan.devtool.com
+      - VIRTUAL_HOST=wekan.devtool.com
       - MAIL_URL='smtp://<mail_url>:25/?ignoreTLS=true&tls={rejectUnauthorized:false}'
       - MAIL_FROM='Wekan Notifications <noreply.wekan@mydomain.com>'
       - WITH_API=true
+      - RICHER_CARD_COMMENT_EDITOR=true
+      - CARD_OPENED_WEBHOOK_ENABLED=false
+      - BIGEVENTS_PATTERN=NONE
       - BROWSER_POLICY_ENABLED=true
+      - LDAP_BACKGROUND_SYNC_INTERVAL=''
     depends_on:
       - wekandb
 
