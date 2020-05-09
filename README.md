@@ -34,6 +34,7 @@ $ docker-compose up -d
 [UMLの爆速プレビュー環境をVisual Studio Code + PlantUML Server on Dockerで簡単に構築する](https://dev.classmethod.jp/tool/plantuml-server-on-docker/)
 
 \* PlantUML を Docker で起動する手順は不要です。
+
 \* Plantuml: Server の値には http://plantuml.devtool.com を設定してください。
 
 ## Wekan（[GitHub](https://github.com/wekan/wekan)）
@@ -53,8 +54,7 @@ $ docker-compose up -d
 ## Crowi（[GitHub](https://github.com/crowi/crowi))
 　Markdown で記述できる Wiki です。個人的なメモをまとめるために使います。
 
-
-\* **本ツールは nginx で起動していません。**
+　**本ツールは nginx で起動していません。**
 
 #### Crowi のリポジトリをクローンします。
 ```bash
